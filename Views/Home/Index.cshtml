@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <!-- Button to call the API -->
+    <button id="apiButton" onclick="callApi()">Call API</button>
+
+    <!-- Element to display the API response -->
+    <p id="apiResponse"></p>
+</div>
+
+<script>
+    function callApi() {
+        // Make a GET request to your API endpoint
+        fetch('/controller', {
+            method: 'GET',
+        })
+        .then(response => response.json()) // Assuming the API returns JSON data
+        .then(data => {
+            // Update the response text on the page
+            document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // Handle any errors that occurred during the API call if needed
+        });
+    }
+</script>
